@@ -1,0 +1,529 @@
+[gd_scene load_steps=12 format=3 uid="uid://n8w7neuguruv"]
+
+[ext_resource type="Script" uid="uid://cud6y10cqe0h6" path="res://scripts/Level.gd" id="1_k5jlv"]
+[ext_resource type="Script" uid="uid://df4px8ftc58f3" path="res://scripts/Player.gd" id="2_k5jlv"]
+[ext_resource type="Script" uid="uid://dch6ais63lcct" path="res://scripts/PauseMenu.gd" id="3_4qegb"]
+[ext_resource type="Script" uid="uid://br3obh37cgcrd" path="res://scripts/PauseSaveGameMenu.gd" id="4_faw0r"]
+[ext_resource type="Script" uid="uid://jacrjwcyjcgf" path="res://scripts/PauseLoadGameMenu.gd" id="5_2eouu"]
+[ext_resource type="Script" uid="uid://d4lbds805ql8m" path="res://scripts/PausePreferencesMenu.gd" id="6_4qegb"]
+[ext_resource type="Script" uid="uid://bwi57l3crgbhb" path="res://scripts/PauseAboutMenu.gd" id="7_faw0r"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q3wo1"]
+radius = 29.2
+height = 65.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k5jlv"]
+radius = 18.53
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhqny"]
+size = Vector2(350, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k5jlv"]
+size = Vector2(5000, 300)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_k5jlv")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(-350, 0)
+script = ExtResource("2_k5jlv")
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -35.0
+offset_right = 30.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.509804, 0.498039, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CapsuleShape2D_q3wo1")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="AttackVisual" type="Node2D" parent="Player"]
+visible = false
+
+[node name="AttackCircle" type="ColorRect" parent="Player/AttackVisual"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.5
+offset_top = -17.5
+offset_right = 17.5
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.207843, 0.278431, 1, 1)
+
+[node name="AttackCollision" type="CollisionShape2D" parent="Player/AttackVisual"]
+shape = SubResource("CircleShape2D_k5jlv")
+
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(-300, 150)
+
+[node name="ColorRect" type="ColorRect" parent="Platform1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -12.5
+offset_right = 175.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.341176, 0.490196, 0.341176, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
+shape = SubResource("RectangleShape2D_uhqny")
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(0, -50)
+
+[node name="ColorRect" type="ColorRect" parent="Platform2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -12.5
+offset_right = 175.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.341176, 0.490196, 0.341176, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+shape = SubResource("RectangleShape2D_uhqny")
+
+[node name="Platform3" type="StaticBody2D" parent="."]
+position = Vector2(300, 150)
+
+[node name="ColorRect" type="ColorRect" parent="Platform3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -12.5
+offset_right = 175.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.341176, 0.490196, 0.341176, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
+shape = SubResource("RectangleShape2D_uhqny")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(0, 450)
+
+[node name="ColorRect" type="ColorRect" parent="Ground"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2500.0
+offset_top = -150.0
+offset_right = 2500.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.341176, 0.490196, 0.341176, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_k5jlv")
+
+[node name="PauseMenuLayer" type="CanvasLayer" parent="."]
+process_mode = 2
+layer = 100
+
+[node name="PauseMenu" type="Control" parent="PauseMenuLayer"]
+process_mode = 2
+layout_direction = 2
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_4qegb")
+
+[node name="Background" type="ColorRect" parent="PauseMenuLayer/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenuLayer/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenuLayer/PauseMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PauseMenuLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "PAUSE"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PauseMenuLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume Game"
+
+[node name="SaveGameButton" type="Button" parent="PauseMenuLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Save Game"
+
+[node name="LoadGameButton" type="Button" parent="PauseMenuLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Load Game"
+
+[node name="PreferencesButton" type="Button" parent="PauseMenuLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Preferences"
+
+[node name="AboutButton" type="Button" parent="PauseMenuLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "About"
+
+[node name="ExitButton" type="Button" parent="PauseMenuLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit Game"
+
+[node name="PauseSaveGameMenu" type="Control" parent="PauseMenuLayer/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_faw0r")
+
+[node name="PauseSaveMenuMarginContainer" type="MarginContainer" parent="PauseMenuLayer/PauseMenu/PauseSaveGameMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseSaveMenuVBoxContainer" type="VBoxContainer" parent="PauseMenuLayer/PauseMenu/PauseSaveGameMenu/PauseSaveMenuMarginContainer"]
+layout_mode = 2
+
+[node name="PauseSaveMenuTitle" type="Label" parent="PauseMenuLayer/PauseMenu/PauseSaveGameMenu/PauseSaveMenuMarginContainer/PauseSaveMenuVBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "SAVE GAME"
+horizontal_alignment = 1
+
+[node name="PauseSaveMenuMessageLabel" type="Label" parent="PauseMenuLayer/PauseMenu/PauseSaveGameMenu/PauseSaveMenuMarginContainer/PauseSaveMenuVBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="PauseSaveMenuSlotContainer" type="VBoxContainer" parent="PauseMenuLayer/PauseMenu/PauseSaveGameMenu/PauseSaveMenuMarginContainer/PauseSaveMenuVBoxContainer"]
+layout_mode = 2
+
+[node name="PauseSaveMenuNavigationContainer" type="HBoxContainer" parent="PauseMenuLayer/PauseMenu/PauseSaveGameMenu/PauseSaveMenuMarginContainer/PauseSaveMenuVBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PauseSaveMenuPrevButton" type="Button" parent="PauseMenuLayer/PauseMenu/PauseSaveGameMenu/PauseSaveMenuMarginContainer/PauseSaveMenuVBoxContainer/PauseSaveMenuNavigationContainer"]
+layout_mode = 2
+text = "< Prev"
+
+[node name="PauseSaveMenuPageLabel" type="Label" parent="PauseMenuLayer/PauseMenu/PauseSaveGameMenu/PauseSaveMenuMarginContainer/PauseSaveMenuVBoxContainer/PauseSaveMenuNavigationContainer"]
+layout_mode = 2
+text = "Page 1 of 20"
+
+[node name="PauseSaveMenuNextButton" type="Button" parent="PauseMenuLayer/PauseMenu/PauseSaveGameMenu/PauseSaveMenuMarginContainer/PauseSaveMenuVBoxContainer/PauseSaveMenuNavigationContainer"]
+layout_mode = 2
+text = "Next >"
+
+[node name="PauseSaveMenuBackButton" type="Button" parent="PauseMenuLayer/PauseMenu/PauseSaveGameMenu/PauseSaveMenuMarginContainer/PauseSaveMenuVBoxContainer"]
+layout_mode = 2
+text = "Back to Pause Menu"
+
+[node name="PauseSaveMenuConfirmationDialog" type="AcceptDialog" parent="PauseMenuLayer/PauseMenu/PauseSaveGameMenu"]
+
+[node name="Label" type="Label" parent="PauseMenuLayer/PauseMenu/PauseSaveGameMenu/PauseSaveMenuConfirmationDialog"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Ok" type="Button" parent="PauseMenuLayer/PauseMenu/PauseSaveGameMenu/PauseSaveMenuConfirmationDialog"]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Cancel" type="Button" parent="PauseMenuLayer/PauseMenu/PauseSaveGameMenu/PauseSaveMenuConfirmationDialog"]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="PauseLoadGameMenu" type="Control" parent="PauseMenuLayer/PauseMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_2eouu")
+
+[node name="PauseLoadMenuMarginContainer" type="MarginContainer" parent="PauseMenuLayer/PauseMenu/PauseLoadGameMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseLoadMenuVBoxContainer" type="VBoxContainer" parent="PauseMenuLayer/PauseMenu/PauseLoadGameMenu/PauseLoadMenuMarginContainer"]
+layout_mode = 2
+
+[node name="PauseLoadMenuTitle" type="Label" parent="PauseMenuLayer/PauseMenu/PauseLoadGameMenu/PauseLoadMenuMarginContainer/PauseLoadMenuVBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "LOAD GAME"
+horizontal_alignment = 1
+
+[node name="PauseLoadMenuMessageLabel" type="Label" parent="PauseMenuLayer/PauseMenu/PauseLoadGameMenu/PauseLoadMenuMarginContainer/PauseLoadMenuVBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="PauseLoadMenuSlotContainer" type="VBoxContainer" parent="PauseMenuLayer/PauseMenu/PauseLoadGameMenu/PauseLoadMenuMarginContainer/PauseLoadMenuVBoxContainer"]
+layout_mode = 2
+
+[node name="PauseLoadMenuNavigationContainer" type="HBoxContainer" parent="PauseMenuLayer/PauseMenu/PauseLoadGameMenu/PauseLoadMenuMarginContainer/PauseLoadMenuVBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PauseLoadMenuPrevButton" type="Button" parent="PauseMenuLayer/PauseMenu/PauseLoadGameMenu/PauseLoadMenuMarginContainer/PauseLoadMenuVBoxContainer/PauseLoadMenuNavigationContainer"]
+layout_mode = 2
+text = "< Prev"
+
+[node name="PauseLoadMenuPageLabel" type="Label" parent="PauseMenuLayer/PauseMenu/PauseLoadGameMenu/PauseLoadMenuMarginContainer/PauseLoadMenuVBoxContainer/PauseLoadMenuNavigationContainer"]
+layout_mode = 2
+text = "Page 1 of 20"
+
+[node name="PauseLoadMenuNextButton" type="Button" parent="PauseMenuLayer/PauseMenu/PauseLoadGameMenu/PauseLoadMenuMarginContainer/PauseLoadMenuVBoxContainer/PauseLoadMenuNavigationContainer"]
+layout_mode = 2
+text = "Next >"
+
+[node name="PauseLoadMenuBackButton" type="Button" parent="PauseMenuLayer/PauseMenu/PauseLoadGameMenu/PauseLoadMenuMarginContainer/PauseLoadMenuVBoxContainer"]
+layout_mode = 2
+text = "Back to Pause Menu"
+
+[node name="PausePreferencesMenu" type="Control" parent="PauseMenuLayer/PauseMenu"]
+process_mode = 2
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_4qegb")
+action_button_names = {
+"attack": "AttackButton",
+"jump": "JumpButton",
+"move_left": "LeftButton",
+"move_right": "RightButton"
+}
+
+[node name="PausePrefsMarginContainer" type="MarginContainer" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PausePrefsVBoxContainer" type="VBoxContainer" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer"]
+layout_mode = 2
+
+[node name="PausePrefsTitle" type="Label" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "PREFERENCES"
+horizontal_alignment = 1
+
+[node name="PausePrefsMessageLabel" type="Label" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+text = "Click to change the controls"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PausePrefsActionsContainer" type="VBoxContainer" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer"]
+layout_mode = 2
+
+[node name="PausePrefsLeftContainer" type="HBoxContainer" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer/PausePrefsActionsContainer"]
+layout_mode = 2
+
+[node name="PausePrefsLeftLabel" type="Label" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer/PausePrefsActionsContainer/PausePrefsLeftContainer"]
+layout_mode = 2
+text = "Move Left:"
+
+[node name="PausePrefsLeftButton" type="Button" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer/PausePrefsActionsContainer/PausePrefsLeftContainer"]
+layout_mode = 2
+text = "???"
+
+[node name="PausePrefsRightContainer" type="HBoxContainer" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer/PausePrefsActionsContainer"]
+layout_mode = 2
+
+[node name="PausePrefsRightLabel" type="Label" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer/PausePrefsActionsContainer/PausePrefsRightContainer"]
+layout_mode = 2
+text = "Move Right:"
+
+[node name="PausePrefsRightButton" type="Button" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer/PausePrefsActionsContainer/PausePrefsRightContainer"]
+layout_mode = 2
+text = "???"
+
+[node name="PausePrefsJumpContainer" type="HBoxContainer" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer/PausePrefsActionsContainer"]
+layout_mode = 2
+
+[node name="PausePrefsJumpLabel" type="Label" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer/PausePrefsActionsContainer/PausePrefsJumpContainer"]
+layout_mode = 2
+text = "Jump:"
+
+[node name="PausePrefsJumpButton" type="Button" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer/PausePrefsActionsContainer/PausePrefsJumpContainer"]
+layout_mode = 2
+text = "???"
+
+[node name="PausePrefsAttackContainer" type="HBoxContainer" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer/PausePrefsActionsContainer"]
+layout_mode = 2
+
+[node name="PausePrefsAttackLabel" type="Label" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer/PausePrefsActionsContainer/PausePrefsAttackContainer"]
+layout_mode = 2
+text = "Attack:"
+
+[node name="PausePrefsAttackButton" type="Button" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer/PausePrefsActionsContainer/PausePrefsAttackContainer"]
+layout_mode = 2
+text = "???"
+
+[node name="PausePrefsResetButton" type="Button" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer"]
+layout_mode = 2
+text = "Reset to Defaults"
+
+[node name="PausePrefsBackButton" type="Button" parent="PauseMenuLayer/PauseMenu/PausePreferencesMenu/PausePrefsMarginContainer/PausePrefsVBoxContainer"]
+layout_mode = 2
+text = "Back to Pause Menu"
+
+[node name="PauseAboutMenu" type="Control" parent="PauseMenuLayer/PauseMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_faw0r")
+
+[node name="PauseAboutMarginContainer" type="MarginContainer" parent="PauseMenuLayer/PauseMenu/PauseAboutMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseAboutVBoxContainer" type="VBoxContainer" parent="PauseMenuLayer/PauseMenu/PauseAboutMenu/PauseAboutMarginContainer"]
+layout_mode = 2
+
+[node name="PauseAboutTitle" type="Label" parent="PauseMenuLayer/PauseMenu/PauseAboutMenu/PauseAboutMarginContainer/PauseAboutVBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "ABOUT"
+horizontal_alignment = 1
+
+[node name="PauseAboutInfoLabel" type="Label" parent="PauseMenuLayer/PauseMenu/PauseAboutMenu/PauseAboutMarginContainer/PauseAboutVBoxContainer"]
+layout_mode = 2
+text = "Zombon Game
+Version 1.0
+
+Created with Godot Engine"
+horizontal_alignment = 1
+
+[node name="PauseAboutBackButton" type="Button" parent="PauseMenuLayer/PauseMenu/PauseAboutMenu/PauseAboutMarginContainer/PauseAboutVBoxContainer"]
+layout_mode = 2
+text = "Back to Pause Menu"
+
+[node name="UI" type="Node2D" parent="."]
+
+[node name="HUD" type="Node2D" parent="UI"]
+
+[node name="MessageLabel" type="Label" parent="UI/HUD"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="PauseMenuLayer/PauseMenu/PauseSaveGameMenu/PauseSaveMenuMarginContainer/PauseSaveMenuVBoxContainer/PauseSaveMenuNavigationContainer/PauseSaveMenuPrevButton" to="PauseMenuLayer/PauseMenu/PauseSaveGameMenu" method="_on_prev_button_pressed"]
+[connection signal="pressed" from="PauseMenuLayer/PauseMenu/PauseSaveGameMenu/PauseSaveMenuMarginContainer/PauseSaveMenuVBoxContainer/PauseSaveMenuNavigationContainer/PauseSaveMenuNextButton" to="PauseMenuLayer/PauseMenu/PauseSaveGameMenu" method="_on_next_button_pressed"]
+[connection signal="pressed" from="PauseMenuLayer/PauseMenu/PauseSaveGameMenu/PauseSaveMenuMarginContainer/PauseSaveMenuVBoxContainer/PauseSaveMenuBackButton" to="PauseMenuLayer/PauseMenu/PauseSaveGameMenu" method="_on_back_button_pressed"]
